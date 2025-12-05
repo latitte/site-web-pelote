@@ -2,7 +2,7 @@
 $lang = array(
     "title" => "Interface Client",
     "menu-newsletter" => "Newsletter",
-    "tournament" => "Le Tournoi Des Sorcières d'Ilharre",
+    "tournament" => "Le Tournoi d'Hiver d'Ilharre",
     "menu-accueil" => "Accueil",
     "menu-equipes" => "Les équipes",
     "menu-report" => "Report",

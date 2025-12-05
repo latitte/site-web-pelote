@@ -2,7 +2,7 @@
 $lang = array(
     "title" => "Harrera",
     "menu-newsletter" => "Berripaper",
-    "tournament" => "Sorginen Txapelketa",
+    "tournament" => "Ilharreko Txapelketa",
     "menu-accueil" => "Harrera",
     "menu-equipes" => "Taldeak",
     "menu-report" => "Atzeratze",
