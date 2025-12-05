@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Live Spectateur</title>
+</head>
+<body>
+  <h2>📺 Live en direct</h2>
+  <video id="live" autoplay muted playsinline controls style="width:100%; max-width:600px;"></video>
+  <p id="log" style="font-family: monospace;"></p>
+
+  <script>
+    const video = document.getElementById('live');
+    const log = document.getElementById('log');
+    let lastPlayed = null;
+
+    async function checkAndPlay() {
+      try {
+        const status = await fetch('status.json?_=' + Date.now()).then(r => r.json());
+        const index = status.ready;
+
+        if (index === lastPlayed) {
+          log.innerText = "⏳ En attente d’une nouvelle vidéo...";
+          return;
+        }
+
+        const res = await fetch(`live${index}.webm?_=${Date.now()}`);
+        const blob = await res.blob();
+
+        if (blob.size < 50000) {
+          log.innerText = "📛 Vidéo trop petite (encore en upload)";
+          return;
+        }
+
+        const url = URL.createObjectURL(blob);
+        video.src = url;
+
+        if (video.currentSrc) URL.revokeObjectURL(video.currentSrc);
+        lastPlayed = index;
+        log.innerText = `🎬 Lecture de live${index}.webm (${(blob.size / 1000).toFixed(1)} ko)`;
+
+      } catch (e) {
+        log.innerText = "❌ Erreur : " + e.message;
+      }
+    }
+
+    checkAndPlay();
+    setInterval(checkAndPlay, 6000);
+  </script>
+</body>
+</html>

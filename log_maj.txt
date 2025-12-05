@@ -1,0 +1,30 @@
+Il faudrait : 
+    1' Créer une page ou l'on puisse voir les parties implacées par les API
+
+24/07/2024 --
+    La date d'ajout des barrages dans le calendrier est parametrable depuis l'interface.
+
+26/07/2024
+    Tous les parameètres doivent être dynamique grâce à la bdd
+
+    Info : 
+        - J'ai ajouté un e à "dimanch" calendrier_automatique.php l°86
+        - Ajout des séries dynamique dans classement_equipe.php | verif faites (affichage des séries seulement)
+        - Ligne 143 de complete_score.php (chepa si elle est utile, a voir...)
+        - Ajout des séries dynamique dans create_poules_auto.php (aucune vérif)
+        - Ajout des séries dynamique dans lancement_finales.php (aucune vérif)
+        
+        - Voir pour tout dynamiser bdd, voir même la page entiere (copier le calendrier peut etre) - partie_non_placee.php
+        - Voir pour tout dynamiser bdd ( la légende des parties ) - score_phases_finales.php
+        - Ajout série dynamique (testé & vérif ) - show_series.php
+
+        - Il faut trouver une technique pour gérer les séries et leurs quota max !
+
+28/07/2024 --
+
+        gestion_tournoi.php peut désormais tout personaliser
+
+
+A corriger avant début du tournoi
+
+Quand je modifie une partie, le score ne passe plus ne null

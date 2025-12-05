@@ -1,0 +1,74 @@
+import mysql.connector
+from datetime import date
+
+from recup_partie import partie_18h30
+from recup_partie import partie_19h15
+from recup_partie import partie_20h
+# Configurer la connexion à la base de données
+config = {
+    'user': 'tittdev',
+    'password': 'titi64120$',
+    'host': 'mysql-tittdev.alwaysdata.net',
+    'database': 'tittdev_bdd'
+}
+
+def get_phone_numbers_and_store(numeros_equipe, heure, date):
+    try:
+        # Établir la connexion
+        conn = mysql.connector.connect(**config)
+        cursor = conn.cursor()
+
+        # Vérifier si la partie est "pas de partie"
+        if not numeros_equipe or numeros_equipe == "pas de partie":
+            print(f"Partie à {heure}: pas de partie")
+            return  # Sortir de la fonction sans rien faire
+
+        # Vérifier si numeros_equipe est un dictionnaire valide
+        if isinstance(numeros_equipe, dict):
+            # Construction de la requête SQL pour récupérer les numéros de téléphone
+            query = "SELECT `Numéro Equipe`, Telephone FROM equipe WHERE `Numéro Equipe` IN (%s, %s)"
+            numeros_equipe_list = [numeros_equipe["equipe1"], numeros_equipe["equipe2"]]
+
+            # Exécuter la requête SQL
+            cursor.execute(query, numeros_equipe_list)
+
+            # Récupérer tous les résultats
+            results = cursor.fetchall()
+
+            # Insertion des résultats dans la table partie_de_demain
+            insert_query = "INSERT INTO partie_de_demain (`Numéro Equipe`, Telephone, Heure, Date) VALUES (%s, %s, %s, %s)"
+            for equipe_numero, telephone in results:
+                cursor.execute(insert_query, (equipe_numero, telephone, heure, date))
+
+            # Valider les transactions
+            conn.commit()
+        else:
+            print(f"Partie à {heure} n'est pas un dictionnaire valide.")
+
+    except mysql.connector.Error as err:
+        print(f"Erreur: {err}")
+    finally:
+        # Fermer le curseur et la connexion à la base de données
+        if 'conn' in locals() and conn.is_connected():
+            cursor.close()
+            conn.close()
+
+
+# Supposons que la date est aujourd'hui
+today_date = date.today()
+
+# Appel de la fonction pour chaque partie avec la date spécifiée
+if isinstance(partie_18h30, dict):
+    get_phone_numbers_and_store(partie_18h30, "18:30", today_date)
+else:
+    print("Partie à 18h30 n'est pas définie correctement.")
+
+if isinstance(partie_19h15, dict):
+    get_phone_numbers_and_store(partie_19h15, "19:15", today_date)
+else:
+    print("Partie à 19h15 n'est pas définie correctement.")
+
+if isinstance(partie_20h, dict):
+    get_phone_numbers_and_store(partie_20h, "20:00", today_date)
+else:
+    print("Partie à 20h n'est pas définie correctement.")

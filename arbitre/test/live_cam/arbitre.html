@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Caméra Arbitre</title>
+</head>
+<body>
+  <h2>🎥 Arbitre – Envoi rotatif</h2>
+  <video id="preview" autoplay muted playsinline style="width:100%; max-width:500px;"></video>
+  <p id="log" style="font-family: monospace;"></p>
+  <button onclick="startRecording()">Démarrer</button>
+
+  <script>
+    let stream;
+    let index = 0;
+
+    async function startRecording() {
+      stream = await navigator.mediaDevices.getUserMedia({
+  video: { facingMode: "environment" },
+  audio: false
+});
+      document.getElementById("preview").srcObject = stream;
+
+      setInterval(() => {
+        const recorder = new MediaRecorder(stream, { mimeType: 'video/webm' });
+        const chunks = [];
+
+        recorder.ondataavailable = e => {
+          if (e.data.size > 0) chunks.push(e.data);
+        };
+
+        recorder.onstop = async () => {
+          const blob = new Blob(chunks, { type: 'video/webm' });
+          const form = new FormData();
+          const filename = `live${index}.webm`;
+          form.append('video', blob, filename);
+
+          const res = await fetch(`upload.php?f=${index}`, {
+            method: 'POST',
+            body: form
+          });
+
+          const txt = await res.text();
+          document.getElementById('log').innerText = `✅ Envoyé ${filename} (${blob.size} o)`;
+
+          index = 1 - index; // alterne 0/1
+        };
+
+        recorder.start();
+        setTimeout(() => recorder.stop(), 20000);
+      }, 20000);
+    }
+  </script>
+</body>
+</html>

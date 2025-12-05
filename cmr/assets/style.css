@@ -1,0 +1,201 @@
+/* style.css */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    background: #f9f9f9;
+    color: #111;
+    line-height: 1.6;
+  }
+  
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 2rem;
+    background-color: white;
+    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.05);
+  }
+  
+  .logo {
+    font-weight: bold;
+    font-size: 1.5rem;
+    color: #000;
+  }
+  
+  nav ul {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+  }
+  
+  nav a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+  
+  nav a:hover {
+    color: #007aff;
+  }
+  
+  .hero {
+    text-align: center;
+    padding: 6rem 2rem;
+    background: linear-gradient(to bottom, #ffffff, #f0f0f5);
+  }
+  
+  .hero h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+  
+  .hero p {
+    font-size: 1.25rem;
+    margin-bottom: 2rem;
+  }
+  
+  .btn, .btn-outline {
+    display: inline-block;
+    padding: 0.75rem 2rem;
+    border-radius: 10px;
+    font-weight: bold;
+    text-decoration: none;
+    transition: background 0.2s, color 0.2s, border 0.2s;
+  }
+  
+  .btn {
+    background-color: #007aff;
+    color: white;
+  }
+  
+  .btn:hover {
+    background-color: #005ecb;
+  }
+  
+  .btn-outline {
+    border: 2px solid #007aff;
+    color: #007aff;
+    background: transparent;
+  }
+  
+  .btn-outline:hover {
+    background-color: #007aff;
+    color: white;
+  }
+  
+  .features {
+    padding: 4rem 2rem;
+    background-color: #fff;
+    text-align: center;
+  }
+  
+  .features h2 {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+  }
+  
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+  }
+  
+  .feature img {
+    /* width: 60px; */
+    margin-bottom: 1rem;
+  }
+  
+  .feature h3 {
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .plans {
+    padding: 4rem 2rem;
+    text-align: center;
+    background: #f7f8fa;
+  }
+  
+  .plans h2 {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+  }
+  
+  .plan-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+  
+  @media(min-width: 768px) {
+    .plan-cards {
+      flex-direction: row;
+      justify-content: center;
+    }
+  }
+  
+  .plan {
+    background: white;
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+    flex: 1;
+    max-width: 300px;
+  }
+  
+  .plan-pro {
+    border: 2px solid #007aff;
+  }
+  
+  .plan h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .plan ul {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 1.5rem;
+  }
+  
+  .plan ul li {
+    margin: 0.5rem 0;
+  }
+  
+  .gallery {
+    padding: 4rem 2rem;
+    background: white;
+    text-align: center;
+  }
+  
+  .gallery h2 {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+  }
+  
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+  }
+  
+  .gallery-grid img {
+    width: 100%;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  }
+  
+  footer {
+    text-align: center;
+    padding: 2rem;
+    font-size: 0.9rem;
+    color: #555;
+    background-color: #f1f1f1;
+  }
